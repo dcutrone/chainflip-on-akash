@@ -1,0 +1,36 @@
+---
+version: "2.0"
+services:
+  chainflip:
+    image: chainfliplabs/chainflip-node:berghain-1.3.2
+    expose:
+      - port: 9944
+        as: 9944
+        to:
+          - global: true
+    command:
+      - bash
+      - "-c"
+    args:
+      - chainflip-node --base-path=/etc/chainflip/chaindata --chain=/etc/chainflip/berghain.chainspec.json --rpc-cors=all --rpc-methods=unsafe --unsafe-rpc-external --sync=warp
+profiles:
+  compute:
+    chainflip:
+      resources:
+        cpu:
+          units: 4
+        memory:
+          size: 8GB
+        storage:
+          - size: 300Gi
+  placement:
+    dcloud:
+      pricing:
+        chainflip:
+          denom: uakt
+          amount: 1000
+deployment:
+  chainflip:
+    dcloud:
+      profile: chainflip
+      count: 1
