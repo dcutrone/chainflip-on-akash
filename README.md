@@ -1,5 +1,3 @@
-# Chainflip RPC node on Akash
-
 # What is Chainflip?
 Chainflip is a decentralised, trustless protocol that enables native cross chain swaps between different blockchains.
 
